@@ -91,48 +91,46 @@ gamesCard.innerHTML = `${GAMES_JSON.length}`
  * total number of contributions, amount donated, and number of games on the site.
  * Skills used: functions, filter
 */
-
+// grab the description container
+const descriptionContainer = document.getElementById("description-container");
 // show only games that do not yet have enough funding
-let numUnderfundedGames = 0;
-let numFundedGames = 0;
+let numUnderfundedGames = filterGamesByFunding("lesser");
+let numFundedGames = filterGamesByFunding("greater");
+displayFundingInfo();
 
 function filterUnfundedOnly() {
     deleteChildElements(gamesContainer);
-    numUnderfundedGames = 0;
-
-    // use filter() to get a list of games that have not yet met their goal
-    let underfundedGames = GAMES_JSON.filter( (games) => { 
-        games.pledged < games.goal ? numUnderfundedGames++ : null;
-        return games.pledged < games.goal;
-    });
-
-    // use the function we previously created to add the unfunded games to the DOM
-    addGamesToPage(underfundedGames);
-    displayFundingInfo();
+    addGamesToPage(numUnderfundedGames);
     console.log("Underfunded Games: ", numUnderfundedGames);
     return numUnderfundedGames;
+
+    // use filter() to get a list of games that have not yet met their goal
+    // let underfundedGames = GAMES_JSON.filter( (games) => { 
+    //     games.pledged < games.goal ? numUnderfundedGames++ : null;
+    //     return games.pledged < games.goal;
+    // });
+
+    // use the function we previously created to add the unfunded games to the DOM
 }
 
 // show only games that are fully funded
 function filterFundedOnly() {
     deleteChildElements(gamesContainer);
-    numFundedGames = 0;
-
-    // use filter() to get a list of games that have met or exceeded their goal
-    let fundedGames = GAMES_JSON.reduce((acc, games) => {
-        if(games.pledged >= games.goal)
-        {
-            numFundedGames++;
-            acc.push(games);    
-        }
-        return acc;
-    }, []);
-
-    // use the function we previously created to add unfunded games to the DOM
-    addGamesToPage(fundedGames);
-    displayFundingInfo();
+    addGamesToPage(numFundedGames);
     console.log("Funded Games: ", numFundedGames);
     return numFundedGames;
+
+    // use filter() to get a list of games that have met or exceeded their goal
+    // let fundedGames = GAMES_JSON.reduce((acc, games) => {
+    //     if(games.pledged >= games.goal)
+    //     {
+    //         numFundedGames++;
+    //         acc.push(games);    
+    //     }
+    //     return acc;
+    // }, []);
+
+    // use the function we previously created to add unfunded games to the DOM
 }
 
 // show all games
@@ -141,7 +139,7 @@ function showAllGames() {
 
     // add all games from the JSON data to the DOM
     addGamesToPage(GAMES_JSON);
-    console.log("All Games: ", GAMES_JSON.length);
+    console.log("All Games: ", GAMES_JSON);
 }
 
 // select each button in the "Our Games" section
@@ -159,34 +157,26 @@ allBtn.addEventListener("click", showAllGames);
  * Skills used: template literals, ternary operator
 */
 
-// grab the description container
-const descriptionContainer = document.getElementById("description-container");
-
-let maxAppearances = false;
-
 function displayFundingInfo() {
-    if(maxAppearances === true) return;
     let gameStr = "game";
     let remainStr = "remain";
 
-    if(numUnderfundedGames === 0) 
+    if(numUnderfundedGames.length === 0) 
     {
         gameStr += "s";
         remainStr += " unfunded. Thank you for helping fund these amazing games!";
     }
-    else if(numUnderfundedGames === 1) remainStr += "s unfunded. We need your help to fund this amazing game!";
+    else if(numUnderfundedGames.length === 1) remainStr += "s unfunded. We need your help to fund this amazing game!";
     else
     {
         gameStr += "s";
         remainStr += " unfunded. We need your help to fund these amazing games!";
     }
     let gameDisplayStr = document.createElement("p");
-    gameDisplayStr.innerHTML = `A total of ${raisedCard.innerHTML} has been raised for ${GAMES_JSON.length} games. Currently, ${numUnderfundedGames} ${gameStr} ${remainStr}`
+    gameDisplayStr.innerHTML = `A total of ${raisedCard.innerHTML} has been raised for ${GAMES_JSON.length} games. Currently, ${numUnderfundedGames.length} ${gameStr} ${remainStr}`
     descriptionContainer.appendChild(gameDisplayStr);
     console.log("Funding Info: ", gameDisplayStr)
     
-    maxAppearances = true;
-    console.log("Funding Info Max Appearances Reached? ", maxAppearances);
     return gameDisplayStr;
 }
 // use filter or reduce to count the number of unfunded games
@@ -205,7 +195,7 @@ function displayFundingInfo() {
 const firstGameContainer = document.getElementById("first-game");
 const secondGameContainer = document.getElementById("second-game");
 
-const sortedGames =  GAMES_JSON.sort( (item1, item2) => {
+const sortedGames =  GAMES_JSON.sort( (item1, item2) => { // What to do with this?
     return item2.pledged - item1.pledged;
 });
 
@@ -223,3 +213,30 @@ firstGameContainer.appendChild(firstGameChild);
 secondGameContainer.appendChild(secondGameChild);
 
 // do the same for the runner up item
+
+/*PERSONAL ADDITIONS*/
+
+function filterGamesByFunding(filterParameter)
+{
+    let filteredGames = 0;
+
+    if(filterParameter === "greater")
+    {
+        filteredGames = GAMES_JSON.reduce((acc, games) => {
+            games.pledged - games.goal >= 0 ? acc.push(games) : 0;
+            return acc;
+        }, []);
+    }
+    else if(filterParameter === "lesser")
+    {
+        filteredGames = GAMES_JSON.reduce((acc, games) => {
+            games.pledged - games.goal < 0 ? acc.push(games) : 0;
+            return acc;
+        }, []);
+    }
+    else return "Error. Invalid Parameter"
+    console.log("Filtered Array: ", filteredGames);
+    return filteredGames;
+}
+
+
