@@ -1,10 +1,10 @@
-# WEB102 Prework - *Game Card Funding* <!-- NOT READY FOR SUBMISSION AS OF APRIL 30th 2025
+# WEB102 Prework - *Game Card Funding*
 
 Submitted by: **Orgito Vuktilaj**
 
 **Game Card Funding** is a website for the company Sea Monster Crowdfunding that displays information about the games they have funded.
 
-Time spent: **X** hours spent in total <!-- DONT FORGET TO FILL OUT
+Time spent: **6-7** hours spent in total (I'm not actually sure, I didn't keep track)
 
 ## Required Features
 
@@ -17,23 +17,17 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
-* [ ] Extra functions that store values, eliminating the need for complex functions to be executed repeatedly for the same data to show.
-* [ ] Unfunded Filter uses whole 1st row and leaves second to be uneven. Add a function to sort this out.
-* [ ] 
+* [x] Extra functions that store values, eliminating the need for complex functions to be executed repeatedly for the same data to show.
+* [x] Changed background color to more deep-sea vibe because that's where sea monsters usually are.
+* [ ] Unfunded Filter uses whole 1st row and leaves second to be uneven. Add a function to sort this out. I'd like to learn how to do this properly.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented features:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='assets/WEB102_Prework_Walkthrough.mp4' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-<!-- Replace this with whatever GIF tool you used! -->
 Video Created with CapCut and OBS.
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
 
 ## Notes
 
