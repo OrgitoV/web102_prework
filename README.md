@@ -25,9 +25,9 @@ The following **optional** features are implemented:
 
 Here's a walkthrough of implemented features:
 
-<img src='assets/WEB102_Prework_Walkthrough.mp4' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='assets/2025-05-01 23-19-00.mp4' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-Video Created with CapCut and OBS.
+Video Created with OBS.
 
 ## Notes
 
